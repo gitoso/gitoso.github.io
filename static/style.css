@@ -1,0 +1,40 @@
+body
+{
+    background-color: #282a2e;
+}
+
+.code
+{
+    font-family: 'Fira Mono', monospace;
+    font-size: 15px;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.code-purple
+{
+    color: #b294bb;
+}
+
+.code-white
+{
+    color: #e0e0e0;
+}
+
+.code-blue
+{
+    color: #81a2be;
+}
+
+.code-green
+{
+    color: #b5bd68;
+}
+
+.code-grey
+{
+    color: #969896;
+}
+
