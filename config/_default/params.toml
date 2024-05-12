@@ -1,0 +1,10 @@
+colorScheme = 'cherry'
+defaultAppearance = 'light'
+autoSwitchAppearance = false
+enableCodeCopy = true
+footer.showAppearanceSwitcher = false
+article.showAuthor = false
+homepage.layout = 'profile'
+article.showReadingTime = false
+article.showPagination = true
+#homepage.showRecent = 'true'

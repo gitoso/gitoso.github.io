@@ -1,2 +1,9 @@
 # TODO List
 TODO.md
+*.lock
+
+# build dir
+public/
+public/*
+resources/
+resources/*

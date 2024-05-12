@@ -1,0 +1,5 @@
+baseURL = 'https://gitoso.zip/'
+languageCode = 'en'
+title = "Gianluigi Dal Toso"
+paginate = 10
+

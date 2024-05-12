@@ -1,0 +1,46 @@
+[[main]]
+  name = "Blog"
+  pageRef = "blog"
+  weight = 10
+
+[[main]]
+  name = "Resume"
+  pageRef = "resume"
+  weight = 10
+
+[[main]]
+  name = "Misc"
+  pageRef = "misc"
+  weight = 20
+
+
+[[main]]
+  name = "GitHub"
+  url = "https://github.com/gitoso"
+  weight = 30
+  [main.params]
+    icon = "github"
+    showName = false
+    target = "_blank"
+
+[[main]]
+  name = "LinkedIn"
+  url = "https://www.linkedin.com/in/gianluigi-toso/"
+  weight = 30
+  [main.params]
+    icon = "linkedin"
+    showName = false
+    target = "_blank"
+
+[[main]]
+  identifier = "appearance"
+  weight = 99
+  [main.params]
+    action = "appearance"
+
+[[main]]
+  identifier = "locale"
+  weight = 99
+  [main.params]
+    action = "locale"
+
