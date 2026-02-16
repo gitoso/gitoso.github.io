@@ -1,8 +1,9 @@
 [params.author]
 name = "Gianluigi Dal Toso"
 image = "img/author.jpg"
-#headline = "A generally awesome human"
-#bio = "A little bit about me"
-#links = [
-#  { twitter = "https://twitter.com/username" }
-#]
+headline = "Security Engineer & Software Developer"
+bio = "Brazilian computer engineer (ITA) working in offensive security. Building things with Go. Breaking things for a living."
+links = [
+  { github = "https://github.com/gitoso" },
+  { linkedin = "https://www.linkedin.com/in/gianluigi-toso/" },
+]

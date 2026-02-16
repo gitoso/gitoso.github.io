@@ -4,6 +4,6 @@ showDate: false
 showPagination: false
 ---
 
-# Blog (WIP)
+# Blog
 
-These are my blog posts: (WIP)
+Thoughts on security, software engineering, and things I'm learning along the way.
