@@ -1,5 +1,6 @@
 baseURL = 'https://gitoso.zip/'
 languageCode = 'en'
 title = "Gianluigi Dal Toso"
-paginate = 10
+[pagination]
+pagerSize = 10
 
