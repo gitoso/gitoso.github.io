@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaketz — Book Your Stay Across the Solar System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="logo">🪐 Jaketz</a>
+    <div class="nav-links">
+      <a href="#listings" data-i18n="nav.explore">Explore</a>
+      <div class="lang-selector">
+        <button class="lang-btn" id="langBtn">
+          <span id="langDisplay">🇺🇸 EN</span>
+          <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option" data-lang="en">🇺🇸 English</button>
+          <button class="lang-option" data-lang="pt">🇧🇷 Português</button>
+          <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+        </div>
+      </div>
+      <a href="#" id="cartBtn" class="cart-btn">🛒 <span data-i18n="nav.cart">Cart</span> <span id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1><span data-i18n="hero.title.before">Your Next Vacation Is </span><span class="gradient-text" data-i18n="hero.title.highlight">Out of This World</span></h1>
+      <p data-i18n="hero.subtitle">Book unique stays on planets, moons, and space stations across our solar system. Life support included — most of the time.</p>
+      <a href="#listings" class="btn btn-primary" data-i18n="hero.cta">Explore Destinations</a>
+    </div>
+  </header>
+
+  <!-- FILTERS -->
+  <section class="filters-section" id="listings">
+    <div class="container">
+      <h2 data-i18n="filters.heading">Find Your Perfect Stay</h2>
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label data-i18n="filters.price">Price Range</label>
+          <select id="filterPrice">
+            <option value="all" data-i18n-option="filters.price.all">Any Price</option>
+            <option value="0-5000" data-i18n-option="filters.price.0-5000">Up to $5,000/night</option>
+            <option value="5000-20000" data-i18n-option="filters.price.5000-20000">$5,000 – $20,000/night</option>
+            <option value="20000-100000" data-i18n-option="filters.price.20000-100000">$20,000 – $100,000/night</option>
+            <option value="100000+" data-i18n-option="filters.price.100000+">$100,000+/night</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label data-i18n="filters.oxygen">Oxygen</label>
+          <select id="filterOxygen">
+            <option value="all" data-i18n-option="filters.oxygen.all">Any</option>
+            <option value="natural" data-i18n-option="filters.oxygen.natural">Natural Atmosphere</option>
+            <option value="supplied" data-i18n-option="filters.oxygen.supplied">Supplied (Dome/Suit)</option>
+            <option value="none" data-i18n-option="filters.oxygen.none">None (BYO Tank)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label data-i18n="filters.lifeSupport">Life Support</label>
+          <select id="filterLifeSupport">
+            <option value="all" data-i18n-option="filters.lifeSupport.all">Any</option>
+            <option value="full" data-i18n-option="filters.lifeSupport.full">Full Life Support</option>
+            <option value="partial" data-i18n-option="filters.lifeSupport.partial">Partial Life Support</option>
+            <option value="minimal" data-i18n-option="filters.lifeSupport.minimal">Minimal</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label data-i18n="filters.gravity">Gravity</label>
+          <select id="filterGravity">
+            <option value="all" data-i18n-option="filters.gravity.all">Any</option>
+            <option value="earth-like" data-i18n-option="filters.gravity.earth-like">Earth-like</option>
+            <option value="low" data-i18n-option="filters.gravity.low">Low Gravity</option>
+            <option value="high" data-i18n-option="filters.gravity.high">High Gravity</option>
+            <option value="zero" data-i18n-option="filters.gravity.zero">Zero-G</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label data-i18n="filters.amenities">Amenities</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" id="amenityRadiation"> <span data-i18n="filters.amenity.radiation">Radiation Shield</span></label>
+            <label class="checkbox-label"><input type="checkbox" id="amenityTemp"> <span data-i18n="filters.amenity.temp">Temp Control</span></label>
+            <label class="checkbox-label"><input type="checkbox" id="amenityComms"> <span data-i18n="filters.amenity.comms">Comms Array</span></label>
+            <label class="checkbox-label"><input type="checkbox" id="amenityLanding"> <span data-i18n="filters.amenity.landing">Landing Pad</span></label>
+          </div>
+        </div>
+        <button class="btn btn-secondary" id="applyFilters" data-i18n="filters.apply">Apply Filters</button>
+        <button class="btn btn-ghost" id="clearFilters" data-i18n="filters.clear">Clear</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTINGS -->
+  <section class="listings-section">
+    <div class="container">
+      <div class="listings-grid" id="listingsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTING MODAL -->
+  <div class="modal-overlay" id="listingModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal modal-cart">
+      <button class="modal-close" id="cartClose">&times;</button>
+      <h2 data-i18n="cart.title">Your Bookings</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>🪐 Jaketz</h4>
+          <p data-i18n="footer.brand">Making the solar system your home away from home since 2147.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.safety.title">Safety</h4>
+          <p data-i18n="footer.safety.text">All listings include basic emergency beacon. Life insurance and rescue plans available at checkout.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.legal.title">Legal</h4>
+          <p data-i18n="footer.legal.text">Jaketz is not liable for incidents involving solar flares, asteroid impacts, alien encounters, or spontaneous combustion.</p>
+        </div>
+      </div>
+      <p class="footer-bottom" data-i18n-html="footer.bottom">Photos provided by <a href="https://unsplash.com" target="_blank">Unsplash</a>. &copy; 2147 Jaketz Interplanetary Inc.</p>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
