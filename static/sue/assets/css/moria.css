@@ -1,0 +1,185 @@
+
+/* Moria Gate */
+.moria-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0a12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+.moria-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.moria-scene {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+/* Door arch */
+.moria-door {
+  position: relative;
+  width: 320px;
+  height: 420px;
+  margin: 0 auto 2rem;
+  border: 3px solid #3a5f8a;
+  border-radius: 160px 160px 0 0;
+  box-shadow:
+    0 0 30px rgba(58,95,138,0.3),
+    inset 0 0 30px rgba(58,95,138,0.15);
+  background: radial-gradient(ellipse at center, #0f1525 0%, #080810 100%);
+  overflow: hidden;
+}
+
+/* Elvish glow lines on the arch */
+.moria-door::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 2px solid rgba(58,95,138,0.4);
+  border-radius: 155px 155px 0 0;
+  box-shadow: 0 0 12px rgba(100,160,220,0.2);
+}
+
+/* Stars at the top */
+.moria-stars {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+  letter-spacing: 0.8rem;
+  color: #5b8fb9;
+  text-shadow: 0 0 15px rgba(100,180,255,0.6);
+  animation: moria-twinkle 3s ease-in-out infinite alternate;
+}
+
+/* Tree silhouettes */
+.moria-tree {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  height: 200px;
+  opacity: 0.5;
+}
+.moria-tree-left { left: 20px; }
+.moria-tree-right { right: 20px; }
+.moria-tree svg { width: 100%; height: 100%; }
+
+/* Crown / anvil symbol in center */
+.moria-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #4a7da8;
+  text-shadow: 0 0 20px rgba(74,125,168,0.6);
+  animation: moria-twinkle 4s ease-in-out infinite alternate;
+}
+
+/* Inscription text */
+.moria-inscription {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: #5b8fb9;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-shadow: 0 0 10px rgba(91,143,185,0.4);
+  margin-bottom: 1.5rem;
+}
+.moria-inscription .elvish {
+  display: block;
+  font-size: 0.85rem;
+  color: #3a6a94;
+  margin-top: 0.5rem;
+  letter-spacing: 0.15em;
+}
+
+/* Input area */
+.moria-prompt {
+  color: #7a8a9a;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+.moria-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.moria-input {
+  background: transparent;
+  border: 1px solid #2a4a6a;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  color: #a0c4e8;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  text-align: center;
+  width: 300px;
+  outline: none;
+  letter-spacing: 0.1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.moria-input:focus {
+  border-color: #5b8fb9;
+  box-shadow: 0 0 15px rgba(91,143,185,0.3);
+}
+.moria-input::placeholder {
+  color: #3a5570;
+  font-style: italic;
+}
+
+/* Error shake */
+.moria-shake {
+  animation: moria-shake 0.5s ease;
+}
+@keyframes moria-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Error message */
+.moria-error {
+  color: #8b3a3a;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  min-height: 1.4em;
+  transition: opacity 0.3s;
+}
+
+/* Success glow */
+.moria-door.unlocked {
+  box-shadow:
+    0 0 60px rgba(100,180,255,0.5),
+    inset 0 0 60px rgba(100,180,255,0.3);
+  border-color: #7abfff;
+}
+.moria-door.unlocked .moria-symbol,
+.moria-door.unlocked .moria-stars {
+  color: #a0d4ff;
+  text-shadow: 0 0 30px rgba(160,212,255,0.8);
+}
+
+/* Gandalf quote at bottom */
+.moria-gandalf {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #3a5570;
+  font-style: italic;
+}
+
+@keyframes moria-twinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Body when gate is active */
+body.gate-locked { overflow: hidden; }
