@@ -963,13 +963,13 @@ document.head.appendChild(style);
 
 // ===== INIT =====
 // Apply saved language on load
+// setLanguage() already calls renderSkeletons, renderListings, and renderSpecialEvents
 const savedLang = localStorage.getItem('jaketz-lang');
 if (savedLang && savedLang !== 'en') {
   setLanguage(savedLang);
 } else {
   applyTranslations();
+  renderSkeletons();
+  renderListings(listings);
+  renderSpecialEvents();
 }
-
-renderSkeletons();
-renderListings(listings);
-renderSpecialEvents();
