@@ -801,13 +801,20 @@ const specialEvents = [
   },
 ];
 
+let _specialEventsRenderId = 0;
+
 async function renderSpecialEvents() {
   const grid = document.getElementById('specialEventsGrid');
   if (!grid) return;
   grid.innerHTML = '';
 
+  const renderId = ++_specialEventsRenderId;
+
   const imagePromises = specialEvents.map(e => fetchUnsplashImage(e.searchQuery));
   const images = await Promise.all(imagePromises);
+
+  // A newer render was started while we were fetching — abort this one
+  if (renderId !== _specialEventsRenderId) return;
 
   specialEvents.forEach((event, i) => {
     const img = images[i];
