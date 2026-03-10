@@ -703,6 +703,21 @@ document.getElementById('cartModal').addEventListener('click', (e) => {
 });
 
 // ===== SPECIAL EVENTS =====
+const allPrizes = {
+  sticker:     { id: 'sticker',     icon: '✨', price: 0 },
+  coupon:      { id: 'coupon',      icon: '🏷️', price: 0 },
+  certificate: { id: 'certificate', icon: '📜', price: 0 },
+  will:        { id: 'will',        icon: '⚖️', price: 500 },
+  tattoo:      { id: 'tattoo',      icon: '🎨', price: 200 },
+  playlist:    { id: 'playlist',    icon: '🎵', price: 0 },
+  portrait:    { id: 'portrait',    icon: '📸', price: 300 },
+  blackbox:    { id: 'blackbox',    icon: '📦', price: 750 },
+  naming:      { id: 'naming',      icon: '⭐', price: 1000 },
+  message:     { id: 'message',     icon: '💌', price: 150 },
+  dna:         { id: 'dna',         icon: '🧬', price: 2000 },
+  champagne:   { id: 'champagne',   icon: '🍾', price: 0 },
+};
+
 const specialEvents = [
   {
     id: 1,
@@ -711,9 +726,8 @@ const specialEvents = [
     rating: 4.9,
     reviews: 3,
     searchQuery: 'solar flare sun corona',
-    imageUrl: null,
-    photographer: null,
-    photographerUrl: null,
+    prizes: ['sticker', 'tattoo', 'playlist', 'blackbox'],
+    imageUrl: null, photographer: null, photographerUrl: null,
   },
   {
     id: 2,
@@ -722,9 +736,8 @@ const specialEvents = [
     rating: 4.7,
     reviews: 5,
     searchQuery: 'jupiter atmosphere gas planet',
-    imageUrl: null,
-    photographer: null,
-    photographerUrl: null,
+    prizes: ['certificate', 'portrait', 'blackbox', 'dna'],
+    imageUrl: null, photographer: null, photographerUrl: null,
   },
   {
     id: 3,
@@ -733,9 +746,8 @@ const specialEvents = [
     rating: 4.2,
     reviews: 8,
     searchQuery: 'interstellar asteroid space object',
-    imageUrl: null,
-    photographer: null,
-    photographerUrl: null,
+    prizes: ['sticker', 'will', 'naming', 'message'],
+    imageUrl: null, photographer: null, photographerUrl: null,
   },
   {
     id: 4,
@@ -744,17 +756,49 @@ const specialEvents = [
     rating: 4.5,
     reviews: 2,
     searchQuery: 'comet tail space ice',
-    imageUrl: null,
-    photographer: null,
-    photographerUrl: null,
+    prizes: ['certificate', 'coupon', 'champagne', 'naming'],
+    imageUrl: null, photographer: null, photographerUrl: null,
   },
-];
-
-const specialEventPrizes = [
-  { id: 'sticker', icon: '✨', price: 0 },
-  { id: 'coupon', icon: '🏷️', price: 0 },
-  { id: 'certificate', icon: '📜', price: 0 },
-  { id: 'will', icon: '⚖️', price: 500 },
+  {
+    id: 5,
+    location: 'Sagittarius A* Vicinity',
+    price: 999999,
+    rating: 5.0,
+    reviews: 1,
+    searchQuery: 'black hole space singularity dark',
+    prizes: ['sticker', 'dna', 'naming', 'portrait'],
+    imageUrl: null, photographer: null, photographerUrl: null,
+  },
+  {
+    id: 6,
+    location: 'Venus Surface',
+    price: 95000,
+    rating: 3.8,
+    reviews: 12,
+    searchQuery: 'volcanic lava hot surface extreme',
+    prizes: ['tattoo', 'coupon', 'champagne', 'message'],
+    imageUrl: null, photographer: null, photographerUrl: null,
+  },
+  {
+    id: 7,
+    location: 'Asteroid Belt',
+    price: 120000,
+    rating: 4.4,
+    reviews: 7,
+    searchQuery: 'asteroid rocks space debris field',
+    prizes: ['certificate', 'blackbox', 'playlist', 'tattoo'],
+    imageUrl: null, photographer: null, photographerUrl: null,
+  },
+  {
+    id: 8,
+    location: "Saturn's Rings",
+    price: 275000,
+    rating: 4.6,
+    reviews: 4,
+    searchQuery: 'saturn rings ice rocks orbital',
+    prizes: ['sticker', 'champagne', 'will', 'portrait'],
+    imageUrl: null, photographer: null, photographerUrl: null,
+  },
 ];
 
 async function renderSpecialEvents() {
@@ -825,7 +869,8 @@ function openSpecialEventModal(event) {
 
     <div class="prizes">
       <h3>${t('specialEvents.prizesHeading')}</h3>
-      ${specialEventPrizes.map(p => {
+      ${event.prizes.map(pid => {
+        const p = allPrizes[pid];
         const isFree = p.price === 0;
         return `
         <label class="prize-option ${isFree ? 'prize-free' : ''}">
@@ -881,7 +926,7 @@ function openSpecialEventModal(event) {
     let total = event.price;
     const selectedPrizes = [];
     document.querySelectorAll('.prize-check:checked').forEach(cb => {
-      const prize = specialEventPrizes.find(p => p.id === cb.dataset.prizeId);
+      const prize = allPrizes[cb.dataset.prizeId];
       if (prize) {
         selectedPrizes.push(prize);
         total += prize.price;
