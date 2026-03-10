@@ -575,13 +575,19 @@ function renderCart() {
 
   items.innerHTML = cart.map((item, i) => {
     const nightLabel = item.nights > 1 ? t('cart.nights') : t('cart.night');
-    const title = getListingTitle(item.listing);
+    const title = item.isSpecialEvent ? item.eventTitle : getListingTitle(item.listing);
+    const details = item.isSpecialEvent
+      ? `${item.listing.planet} · ${t('specialEvents.flatFee')}`
+      : `${item.listing.planet} · ${item.nights} ${nightLabel} · ${formatPrice(item.perNight)}/${t('cart.night')}`;
+    const addonNames = item.isSpecialEvent
+      ? item.addons.map(p => t('specialEvents.prize.' + p.id + '.name'))
+      : item.addons.map(a => getAddonName(a));
     return `
     <div class="cart-item">
       <div class="cart-item-info">
         <h4>${title}</h4>
-        <p>${item.listing.planet} · ${item.nights} ${nightLabel} · ${formatPrice(item.perNight)}/${t('cart.night')}</p>
-        ${item.addons.length > 0 ? `<p>${t('cart.addons')} ${item.addons.map(a => getAddonName(a)).join(', ')}</p>` : ''}
+        <p>${details}</p>
+        ${addonNames.length > 0 ? `<p>${t('cart.addons')} ${addonNames.join(', ')}</p>` : ''}
         <button class="cart-remove" data-index="${i}">${t('cart.remove')}</button>
       </div>
       <div class="cart-item-price">${formatPrice(item.total)}</div>
@@ -696,6 +702,208 @@ document.getElementById('cartModal').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open');
 });
 
+// ===== SPECIAL EVENTS =====
+const specialEvents = [
+  {
+    id: 1,
+    location: 'Near the Sun',
+    price: 250000,
+    rating: 4.9,
+    reviews: 3,
+    searchQuery: 'solar flare sun corona',
+    imageUrl: null,
+    photographer: null,
+    photographerUrl: null,
+  },
+  {
+    id: 2,
+    location: 'Jupiter Atmosphere',
+    price: 180000,
+    rating: 4.7,
+    reviews: 5,
+    searchQuery: 'jupiter atmosphere gas planet',
+    imageUrl: null,
+    photographer: null,
+    photographerUrl: null,
+  },
+  {
+    id: 3,
+    location: 'Interstellar Space',
+    price: 500000,
+    rating: 4.2,
+    reviews: 8,
+    searchQuery: 'interstellar asteroid space object',
+    imageUrl: null,
+    photographer: null,
+    photographerUrl: null,
+  },
+  {
+    id: 4,
+    location: 'Interstellar Space',
+    price: 350000,
+    rating: 4.5,
+    reviews: 2,
+    searchQuery: 'comet tail space ice',
+    imageUrl: null,
+    photographer: null,
+    photographerUrl: null,
+  },
+];
+
+const specialEventPrizes = [
+  { id: 'sticker', icon: '✨', price: 0 },
+  { id: 'coupon', icon: '🏷️', price: 0 },
+  { id: 'certificate', icon: '📜', price: 0 },
+  { id: 'will', icon: '⚖️', price: 500 },
+];
+
+async function renderSpecialEvents() {
+  const grid = document.getElementById('specialEventsGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const imagePromises = specialEvents.map(e => fetchUnsplashImage(e.searchQuery));
+  const images = await Promise.all(imagePromises);
+
+  specialEvents.forEach((event, i) => {
+    const img = images[i];
+    event.imageUrl = img.url;
+    event.photographer = img.photographer;
+    event.photographerUrl = img.photographerUrl;
+
+    const title = t(`specialEvent.${event.id}.title`);
+    const card = document.createElement('div');
+    card.className = 'special-event-card';
+    card.onclick = () => openSpecialEventModal(event);
+    card.innerHTML = `
+      <div class="event-card-image-wrapper">
+        <img class="card-image" src="${img.url}" alt="${title}" loading="lazy">
+        <span class="event-badge">${t('specialEvents.badge')}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-planet">${event.location}</div>
+        <div class="card-title">${title}</div>
+        <div class="card-price">${formatPrice(event.price)} <span>${t('specialEvents.flatFee')}</span></div>
+        <div class="card-rating">
+          <span class="stars">${starsHTML(event.rating)}</span>
+          ${event.rating} (${event.reviews} ${t('listings.reviews')})
+        </div>
+        <div class="photo-credit">${t('listings.photoBy')} <a href="${img.photographerUrl}?utm_source=jaketz&utm_medium=referral" target="_blank">${img.photographer}</a> ${t('listings.onUnsplash')} <a href="https://unsplash.com?utm_source=jaketz&utm_medium=referral" target="_blank">Unsplash</a></div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openSpecialEventModal(event) {
+  const modal = document.getElementById('listingModal');
+  const body = document.getElementById('modalBody');
+
+  const title = t(`specialEvent.${event.id}.title`);
+  const desc = t(`specialEvent.${event.id}.desc`);
+
+  body.innerHTML = `
+    <div class="danger-banner">
+      ⚠️ ${t('specialEvents.dangerBanner')}
+    </div>
+    <img class="modal-image" src="${event.imageUrl}" alt="${title}">
+    <div class="photo-credit" style="margin-bottom:16px;">${t('listings.photoBy')} <a href="${event.photographerUrl}?utm_source=jaketz&utm_medium=referral" target="_blank">${event.photographer}</a> ${t('listings.onUnsplash')} <a href="https://unsplash.com?utm_source=jaketz&utm_medium=referral" target="_blank">Unsplash</a></div>
+    <h2>${title}</h2>
+    <div class="planet-name">${event.location}</div>
+    <p class="description">${desc}</p>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <div class="label">${t('modal.rating')}</div>
+        <div class="value"><span class="stars">${starsHTML(event.rating)}</span> ${event.rating} (${event.reviews} ${t('listings.reviews')})</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">${t('modal.basePrice')}</div>
+        <div class="value">${formatPrice(event.price)} (${t('specialEvents.flatFee')})</div>
+      </div>
+    </div>
+
+    <div class="prizes">
+      <h3>${t('specialEvents.prizesHeading')}</h3>
+      ${specialEventPrizes.map(p => {
+        const isFree = p.price === 0;
+        return `
+        <label class="prize-option ${isFree ? 'prize-free' : ''}">
+          <div class="addon-left">
+            ${isFree
+              ? `<span class="prize-included-check">✓</span>`
+              : `<input type="checkbox" class="prize-check" data-prize-id="${p.id}" data-price="${p.price}">`
+            }
+            <div class="addon-icon">${p.icon}</div>
+            <div>
+              <div class="addon-name">${t('specialEvents.prize.' + p.id + '.name')}</div>
+              <div class="addon-desc">${t('specialEvents.prize.' + p.id + '.desc')}</div>
+            </div>
+          </div>
+          <div class="addon-price">${isFree ? t('cart.addons').replace(':', '') + ' ✓' : '+' + formatPrice(p.price)}</div>
+        </label>`;
+      }).join('')}
+    </div>
+
+    <div class="waiver-section">
+      <label class="waiver-label">
+        <input type="checkbox" id="waiverCheck">
+        <span>${t('specialEvents.waiver')}</span>
+      </label>
+    </div>
+
+    <div class="booking-bar">
+      <div class="booking-total" id="bookingTotal">${formatPrice(event.price)}</div>
+      <button class="btn btn-primary" id="bookNowBtn" disabled>${t('modal.bookNow')}</button>
+    </div>
+  `;
+
+  modal.classList.add('open');
+
+  // Recalc total with paid prizes
+  const recalc = () => {
+    let total = event.price;
+    document.querySelectorAll('.prize-check:checked').forEach(cb => {
+      total += parseInt(cb.dataset.price);
+    });
+    document.getElementById('bookingTotal').textContent = formatPrice(total);
+  };
+
+  document.querySelectorAll('.prize-check').forEach(cb => cb.addEventListener('change', recalc));
+
+  // Waiver gates Book Now
+  document.getElementById('waiverCheck').addEventListener('change', (e) => {
+    document.getElementById('bookNowBtn').disabled = !e.target.checked;
+  });
+
+  // Book now
+  document.getElementById('bookNowBtn').addEventListener('click', () => {
+    let total = event.price;
+    const selectedPrizes = [];
+    document.querySelectorAll('.prize-check:checked').forEach(cb => {
+      const prize = specialEventPrizes.find(p => p.id === cb.dataset.prizeId);
+      if (prize) {
+        selectedPrizes.push(prize);
+        total += prize.price;
+      }
+    });
+
+    cart.push({
+      listing: { id: 'se-' + event.id, planet: event.location },
+      nights: 1,
+      perNight: total,
+      total: total,
+      addons: selectedPrizes,
+      isSpecialEvent: true,
+      eventTitle: title,
+    });
+
+    updateCartCount();
+    modal.classList.remove('open');
+    showNotification(t('cart.addedNotification').replace('{title}', title));
+  });
+}
+
 // Slide-in animation
 const style = document.createElement('style');
 style.textContent = `@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
@@ -712,3 +920,4 @@ if (savedLang && savedLang !== 'en') {
 
 renderSkeletons();
 renderListings(listings);
+renderSpecialEvents();

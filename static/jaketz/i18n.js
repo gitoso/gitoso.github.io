@@ -194,6 +194,32 @@ const translations = {
     'review.r12_1.text': 'They give you an actual certificate that says "I visited the edge of human civilization." It\'s printed on real paper, which is absurdly expensive out here. Framed it immediately. The nitrogen ice plains at sunset are hauntingly beautiful.',
     'review.r12_2.text': 'The communication delay to Earth is over 5 hours each way. I sent a joke to my friend and got their laugh response the next morning. It\'s like texting someone in a different dimension. Beautiful views but bring a good book. Or twelve.',
 
+    // Special Events
+    'specialEvents.heading': 'Special Events',
+    'specialEvents.subtitle': 'Extreme experiences where return is not guaranteed. Life insurance not available. Prizes included.',
+    'specialEvents.badge': 'NO RETURN GUARANTEED',
+    'specialEvents.dangerBanner': 'EXTREME DANGER — This experience involves significant risk of permanent departure from the solar system, molecular rearrangement, or existential transformation. No life insurance or rescue plans are available.',
+    'specialEvents.waiver': 'I acknowledge that return is not guaranteed and that Jaketz Interplanetary Inc. assumes no liability for permanent departure from the solar system, molecular rearrangement, or existential transformation.',
+    'specialEvents.flatFee': 'Flat fee',
+    'specialEvents.waiverRequired': 'You must accept the waiver to proceed',
+    'specialEvents.prizesHeading': 'Included Prizes & Add-ons',
+    'specialEvent.1.title': 'Solar Flare Light Bath',
+    'specialEvent.1.desc': 'Position yourself near the Sun and bathe in the radiant glow of a coronal mass ejection. Extreme radiation, extreme views, extreme sunburn. Sunscreen not included (it would evaporate anyway). Previous participants described the experience as "transcendently warm" — those whose comms still worked, at least.',
+    'specialEvent.2.title': 'Jupiter Deep Dive',
+    'specialEvent.2.desc': 'Descend into Jupiter\'s atmosphere in a reinforced armored capsule. See how deep you can go before the crushing pressure becomes... too crushing. Current record depth: 847km. Current record holder status: "compressed." The views of the gas layers are said to be worth it.',
+    'specialEvent.3.title': '1I/\'Oumuamua Excursion',
+    'specialEvent.3.desc': 'Board the mysterious interstellar object 1I/\'Oumuamua before it leaves the solar system forever. Explore its alien surface while hurtling through deep space at 87km/s. Note: some previous guests have not returned. We\'re sure they\'re having a great time wherever they are.',
+    'specialEvent.4.title': '2I/Borisov Comet Ride',
+    'specialEvent.4.desc': 'Hitch a ride on interstellar comet 2I/Borisov for a one-way scenic route through the cosmos. Enjoy breathtaking tail views, pristine ice formations, and the ever-growing distance from everything you\'ve ever known. Complimentary existential crisis included.',
+    'specialEvents.prize.sticker.name': '"I Survived" Holographic Sticker',
+    'specialEvents.prize.sticker.desc': 'Free with booking — an optimistic memento',
+    'specialEvents.prize.coupon.name': '$100 Off at Jaketz Interplanetary Store',
+    'specialEvents.prize.coupon.desc': 'Limited time offer — redeemable if you return',
+    'specialEvents.prize.certificate.name': '"Point of No Return" Certificate',
+    'specialEvents.prize.certificate.desc': 'Free — suitable for framing (or mailing home)',
+    'specialEvents.prize.will.name': 'Last Will & Testament Filing Service',
+    'specialEvents.prize.will.desc': 'Professional filing handled before departure',
+
     // Footer
     'footer.brand': 'Making the solar system your home away from home since 2147.',
     'footer.safety.title': 'Safety',
@@ -393,6 +419,32 @@ const translations = {
     'review.r11_3.text': 'As vibrações da magnetosfera de Júpiter soltaram minha obturação dentária. Engoli ela no terceiro dia. O kit médico ajudou mas agora estou fazendo uma reclamação para tratamento dentário. As vistas da tempestade eram reconhecidamente espetaculares.',
     'review.r12_1.text': 'Eles te dão um certificado de verdade que diz "Eu visitei a fronteira da civilização humana." É impresso em papel real, que é absurdamente caro aqui. Emoldurei imediatamente. As planícies de gelo de nitrogênio ao pôr do sol são assombrosamente belas.',
     'review.r12_2.text': 'O atraso de comunicação com a Terra é de mais de 5 horas por trecho. Mandei uma piada para minha amiga e recebi a risada de resposta na manhã seguinte. É como mandar mensagem para alguém em outra dimensão. Vistas lindas mas traga um bom livro. Ou doze.',
+
+    // Special Events
+    'specialEvents.heading': 'Eventos Especiais',
+    'specialEvents.subtitle': 'Experiências extremas onde o retorno não é garantido. Seguro de vida não disponível. Prêmios incluídos.',
+    'specialEvents.badge': 'RETORNO NÃO GARANTIDO',
+    'specialEvents.dangerBanner': 'PERIGO EXTREMO — Esta experiência envolve risco significativo de partida permanente do sistema solar, rearranjo molecular ou transformação existencial. Nenhum seguro de vida ou plano de resgate está disponível.',
+    'specialEvents.waiver': 'Eu reconheço que o retorno não é garantido e que a Jaketz Interplanetary Inc. não assume nenhuma responsabilidade por partida permanente do sistema solar, rearranjo molecular ou transformação existencial.',
+    'specialEvents.flatFee': 'Taxa única',
+    'specialEvents.waiverRequired': 'Você deve aceitar o termo para prosseguir',
+    'specialEvents.prizesHeading': 'Prêmios e Complementos Incluídos',
+    'specialEvent.1.title': 'Banho de Luz de Erupção Solar',
+    'specialEvent.1.desc': 'Posicione-se perto do Sol e banhe-se no brilho radiante de uma ejeção de massa coronal. Radiação extrema, vistas extremas, queimadura solar extrema. Protetor solar não incluído (evaporaria de qualquer forma). Participantes anteriores descreveram a experiência como "transcendentemente quente" — aqueles cujas comunicações ainda funcionavam, pelo menos.',
+    'specialEvent.2.title': 'Mergulho Profundo em Júpiter',
+    'specialEvent.2.desc': 'Desça na atmosfera de Júpiter em uma cápsula blindada reforçada. Veja até onde você consegue ir antes que a pressão esmagadora se torne... esmagadora demais. Recorde atual de profundidade: 847km. Status do detentor do recorde: "comprimido." Dizem que as vistas das camadas de gás valem a pena.',
+    'specialEvent.3.title': 'Excursão 1I/\'Oumuamua',
+    'specialEvent.3.desc': 'Embarque no misterioso objeto interestelar 1I/\'Oumuamua antes que ele deixe o sistema solar para sempre. Explore sua superfície alienígena enquanto viaja pelo espaço profundo a 87km/s. Nota: alguns hóspedes anteriores não retornaram. Temos certeza de que estão se divertindo muito onde quer que estejam.',
+    'specialEvent.4.title': 'Passeio no Cometa 2I/Borisov',
+    'specialEvent.4.desc': 'Pegue carona no cometa interestelar 2I/Borisov para uma rota cênica de ida pelo cosmos. Aprecie vistas deslumbrantes da cauda, formações de gelo pristinas e a distância sempre crescente de tudo que você já conheceu. Crise existencial cortesia incluída.',
+    'specialEvents.prize.sticker.name': 'Adesivo Holográfico "Eu Sobrevivi"',
+    'specialEvents.prize.sticker.desc': 'Grátis com a reserva — uma lembrança otimista',
+    'specialEvents.prize.coupon.name': '$100 de desconto na Loja Jaketz Interplanetária',
+    'specialEvents.prize.coupon.desc': 'Oferta por tempo limitado — resgatável se você retornar',
+    'specialEvents.prize.certificate.name': 'Certificado "Ponto Sem Retorno"',
+    'specialEvents.prize.certificate.desc': 'Grátis — adequado para emoldurar (ou enviar para casa)',
+    'specialEvents.prize.will.name': 'Serviço de Registro de Testamento',
+    'specialEvents.prize.will.desc': 'Registro profissional realizado antes da partida',
 
     // Footer
     'footer.brand': 'Fazendo do sistema solar sua segunda casa desde 2147.',
@@ -594,6 +646,32 @@ const translations = {
     'review.r12_1.text': 'Te dan un certificado real que dice "Visité la frontera de la civilización humana." Está impreso en papel real, que es absurdamente caro aquí. Lo enmarqué inmediatamente. Las llanuras de hielo de nitrógeno al atardecer son inquietantemente hermosas.',
     'review.r12_2.text': 'El retraso de comunicación a la Tierra es de más de 5 horas por tramo. Le envié un chiste a mi amiga y recibí su respuesta de risa a la mañana siguiente. Es como enviar mensajes a alguien en otra dimensión. Vistas hermosas pero trae un buen libro. O doce.',
 
+    // Special Events
+    'specialEvents.heading': 'Eventos Especiales',
+    'specialEvents.subtitle': 'Experiencias extremas donde el regreso no está garantizado. Seguro de vida no disponible. Premios incluidos.',
+    'specialEvents.badge': 'REGRESO NO GARANTIZADO',
+    'specialEvents.dangerBanner': 'PELIGRO EXTREMO — Esta experiencia implica un riesgo significativo de partida permanente del sistema solar, reordenamiento molecular o transformación existencial. No hay seguros de vida ni planes de rescate disponibles.',
+    'specialEvents.waiver': 'Reconozco que el regreso no está garantizado y que Jaketz Interplanetary Inc. no asume ninguna responsabilidad por la partida permanente del sistema solar, el reordenamiento molecular o la transformación existencial.',
+    'specialEvents.flatFee': 'Tarifa única',
+    'specialEvents.waiverRequired': 'Debe aceptar la exención para continuar',
+    'specialEvents.prizesHeading': 'Premios y Complementos Incluidos',
+    'specialEvent.1.title': 'Baño de Luz de Erupción Solar',
+    'specialEvent.1.desc': 'Posiciónese cerca del Sol y báñese en el resplandor radiante de una eyección de masa coronal. Radiación extrema, vistas extremas, quemadura solar extrema. Protector solar no incluido (se evaporaría de todos modos). Participantes anteriores describieron la experiencia como "trascendentemente cálida" — aquellos cuyas comunicaciones aún funcionaban, al menos.',
+    'specialEvent.2.title': 'Inmersión Profunda en Júpiter',
+    'specialEvent.2.desc': 'Descienda a la atmósfera de Júpiter en una cápsula blindada reforzada. Vea hasta dónde puede llegar antes de que la presión aplastante se vuelva... demasiado aplastante. Récord actual de profundidad: 847km. Estado del titular del récord: "comprimido." Dicen que las vistas de las capas de gas valen la pena.',
+    'specialEvent.3.title': 'Excursión 1I/\'Oumuamua',
+    'specialEvent.3.desc': 'Aborde el misterioso objeto interestelar 1I/\'Oumuamua antes de que abandone el sistema solar para siempre. Explore su superficie alienígena mientras viaja por el espacio profundo a 87km/s. Nota: algunos huéspedes anteriores no han regresado. Estamos seguros de que la están pasando genial dondequiera que estén.',
+    'specialEvent.4.title': 'Paseo en el Cometa 2I/Borisov',
+    'specialEvent.4.desc': 'Enganche un viaje en el cometa interestelar 2I/Borisov para una ruta escénica de ida por el cosmos. Disfrute de vistas impresionantes de la cola, formaciones de hielo prístinas y la distancia siempre creciente de todo lo que ha conocido. Crisis existencial de cortesía incluida.',
+    'specialEvents.prize.sticker.name': 'Sticker Holográfico "Sobreviví"',
+    'specialEvents.prize.sticker.desc': 'Gratis con la reserva — un recuerdo optimista',
+    'specialEvents.prize.coupon.name': '$100 de descuento en Jaketz Interplanetary Store',
+    'specialEvents.prize.coupon.desc': 'Oferta por tiempo limitado — canjeable si regresa',
+    'specialEvents.prize.certificate.name': 'Certificado "Punto Sin Retorno"',
+    'specialEvents.prize.certificate.desc': 'Gratis — adecuado para enmarcar (o enviar a casa)',
+    'specialEvents.prize.will.name': 'Servicio de Registro de Testamento',
+    'specialEvents.prize.will.desc': 'Registro profesional realizado antes de la partida',
+
     // Footer
     'footer.brand': 'Haciendo del sistema solar tu hogar lejos del hogar desde 2147.',
     'footer.safety.title': 'Seguridad',
@@ -645,5 +723,8 @@ function setLanguage(lang) {
   if (typeof renderSkeletons === 'function') {
     renderSkeletons();
     renderListings(getFilteredListings());
+  }
+  if (typeof renderSpecialEvents === 'function') {
+    renderSpecialEvents();
   }
 }
