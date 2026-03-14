@@ -7,6 +7,9 @@ on:
 
 jobs:
   build-deploy:
+     permissions:
+      contents: write  # To push a branch 
+      pull-requests: write  # To create a PR from that branch
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
