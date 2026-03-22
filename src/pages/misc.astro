@@ -1,0 +1,54 @@
+---
+/*
+  src/pages/misc.astro — Miscellaneous page (renders at /misc/)
+*/
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Misc — Gianluigi Dal Toso">
+  <article>
+    <h1>Misc</h1>
+
+    <section>
+      <h2>What I'm Reading</h2>
+      <p>
+        I just finished reading <em>The Maniac</em> by Benjamín Labatut (awesome
+        book), and I have just started reading <em
+          >Gödel, Escher, Bach: an Eternal Golden Braid</em
+        >, which has been dusting in my stash for some time now.
+      </p>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Get in Touch</h2>
+      <p>
+        The best way to reach me is through <a
+          href="https://www.linkedin.com/in/gianluigi-toso/"
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn</a
+        > or <a
+          href="https://github.com/gitoso"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: var(--space-2xl);
+  }
+
+  h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  section {
+    margin-bottom: var(--space-md);
+  }
+</style>

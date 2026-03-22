@@ -1,0 +1,128 @@
+---
+/*
+  src/pages/blog/index.astro — Blog listing page (renders at /blog/)
+
+  LEARNING NOTES:
+  ─────────────────────────────────────────────────────────────
+  1. getCollection("blog") fetches ALL entries from the "blog"
+     content collection we defined in content.config.ts.
+     It returns typed objects with { id, data, body, render }.
+
+  2. We filter out drafts and sort by date — all at build time.
+     No database, no API calls, no runtime cost.
+
+  3. The .id field comes from the filename (e.g., "hello-astro"
+     from "hello-astro.md"). We use it to build the URL.
+  ─────────────────────────────────────────────────────────────
+*/
+
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Fetch all blog posts, filter drafts, sort newest first
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Helper to format dates consistently
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout title="Blog — Gianluigi Dal Toso">
+  <h1>Blog</h1>
+  <p class="subtitle">
+    Thoughts on security, software engineering, and things I'm learning along
+    the way.
+  </p>
+
+  {
+    posts.length === 0 ? (
+      <p class="empty">No posts yet. Check back soon!</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`} class="post-link">
+              <article>
+                <h2>{post.data.title}</h2>
+                <time datetime={post.data.date.toISOString()}>
+                  {formatDate(post.data.date)}
+                </time>
+                <p>{post.data.description}</p>
+              </article>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .subtitle {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .empty {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .post-list li {
+    margin: 0;
+  }
+
+  .post-link {
+    display: block;
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+    text-decoration: none;
+  }
+
+  .post-link:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    text-decoration: none;
+  }
+
+  .post-link h2 {
+    font-size: var(--text-xl);
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .post-link time {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .post-link p {
+    color: var(--color-text-secondary);
+    margin: var(--space-sm) 0 0 0;
+    font-size: var(--text-sm);
+  }
+</style>

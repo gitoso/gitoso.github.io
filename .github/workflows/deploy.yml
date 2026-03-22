@@ -1,0 +1,60 @@
+# Deploy Astro site to GitHub Pages
+#
+# LEARNING NOTE:
+# This workflow uses GitHub's official actions for Pages deployment.
+# It's simpler than the old peaceiris/actions-gh-pages approach
+# because it doesn't need a separate gh-pages branch.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+  # Allow manual deploys from the Actions tab
+  workflow_dispatch:
+
+# Grant permissions for Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only allow one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro site
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

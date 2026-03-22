@@ -1,0 +1,161 @@
+---
+/*
+  src/pages/resume.astro — Resume page (renders at /resume/)
+
+  LEARNING NOTE:
+  ─────────────────────────────────────────────────────────────
+  This page is a straightforward Astro page with no dynamic data.
+  For structured content like a resume, you could also load the
+  data from a JSON/YAML file and render it with a template.
+  For simplicity and clarity, we write it directly here.
+  ─────────────────────────────────────────────────────────────
+*/
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Resume — Gianluigi Dal Toso">
+  <article class="resume">
+    <h1>Resume</h1>
+
+    <!-- Education -->
+    <section>
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Instituto Tecnológico de Aeronáutica (ITA)</h3>
+        </div>
+        <p class="entry-role">B.S. in Computer Engineering</p>
+        <p>
+          One of Brazil's most competitive engineering programs, with a strong
+          emphasis on mathematics, physics, and computer science fundamentals.
+        </p>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Work Experience -->
+    <section>
+      <h2>Work Experience</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3>SeniorSecurity Engineer — Praetorian</h3>
+          <span class="entry-date">Current</span>
+        </div>
+        <ul>
+          <li>
+            Conduct offensive security assessments across web applications,
+            mobile apps, desktop software, and LLMs
+          </li>
+          <li>Develop internal security tooling in Go and Java</li>
+          <li>Work remotely from Brazil</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Cyber Defense Officer — Brazilian Air Force (FAB)</h3>
+          <span class="entry-date">Previous</span>
+        </div>
+        <ul>
+          <li>Performed red team assessments and vulnerability research</li>
+          <li>Contributed to the Air Force's cyber defense operations</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Skills -->
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <p>Go, Java</p>
+        </div>
+        <div class="skill-category">
+          <h3>Security</h3>
+          <p>
+            Offensive security assessments, penetration testing, vulnerability
+            research, red teaming
+          </p>
+        </div>
+        <div class="skill-category">
+          <h3>Domains</h3>
+          <p>
+            Web applications, mobile applications, desktop applications, LLM
+            security
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .resume h1 {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .resume h2 {
+    margin-bottom: var(--space-lg);
+    color: var(--color-text);
+  }
+
+  .entry {
+    margin-bottom: var(--space-xl);
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .entry-header h3 {
+    font-size: var(--text-lg);
+  }
+
+  .entry-role {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+  }
+
+  .entry-date {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .entry ul {
+    color: var(--color-text-secondary);
+  }
+
+  .entry p {
+    color: var(--color-text-secondary);
+  }
+
+  .skills-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .skill-category h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-xs);
+  }
+
+  .skill-category p {
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+</style>

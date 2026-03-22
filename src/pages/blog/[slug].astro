@@ -1,0 +1,168 @@
+---
+/*
+  src/pages/blog/[slug].astro — Dynamic route for individual blog posts.
+
+  LEARNING NOTES:
+  ─────────────────────────────────────────────────────────────
+  1. DYNAMIC ROUTES: The [slug] in the filename is a parameter.
+     Astro needs to know ALL possible values at build time
+     (since it generates static HTML). That's what
+     getStaticPaths() does — it returns every valid slug.
+
+  2. getStaticPaths() runs once at build time and returns an
+     array of { params, props }. Astro generates one HTML file
+     per entry.
+
+  3. The render() method converts Markdown to HTML. The result
+     includes a <Content /> component you can use in the template.
+
+  4. This is the Astro equivalent of Hugo's single.html template,
+     but with type safety and explicit data flow.
+  ─────────────────────────────────────────────────────────────
+*/
+
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// getStaticPaths tells Astro which pages to generate
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+// TypeScript: infer the type from getStaticPaths
+type Props = {
+  post: Awaited<ReturnType<typeof getCollection<"blog">>>[number];
+};
+
+// Get the post from props (passed by getStaticPaths)
+const { post } = Astro.props as Props;
+
+// Render the Markdown content to HTML
+const { Content } = await render(post);
+
+// Format the date
+const formattedDate = post.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<BaseLayout title={`${post.data.title} — Gianluigi Dal Toso`} description={post.data.description}>
+  <article class="blog-post">
+    <!-- Post header -->
+    <header>
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+      {
+        post.data.tags && (
+          <div class="tags">
+            {post.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <!-- Rendered Markdown content -->
+    <div class="content">
+      <!--
+        <Content /> is a special Astro component returned by render().
+        It contains the Markdown converted to HTML.
+      -->
+      <Content />
+    </div>
+
+    <!-- Back link -->
+    <nav class="back-link">
+      <a href="/blog/">&larr; Back to all posts</a>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .blog-post h1 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-post time {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .tags {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .tag {
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+    background-color: rgba(37, 99, 235, 0.08);
+    padding: 0.15em 0.6em;
+    border-radius: 9999px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .back-link a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>
+
+<!--
+  LEARNING NOTE:
+  We use is:global here because the Markdown content is rendered
+  by <Content />, which is a child component. Scoped styles can't
+  reach into child components, so we need is:global for the
+  .content wrapper to style the generated HTML (h2, p, ul, etc).
+-->
+<style is:global>
+  .content h2 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .content h3 {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .content p {
+    margin-bottom: var(--space-md);
+  }
+
+  .content ul,
+  .content ol {
+    margin-bottom: var(--space-md);
+  }
+
+  .content blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-lg);
+    margin: var(--space-lg) 0;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+</style>

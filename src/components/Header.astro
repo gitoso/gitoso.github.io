@@ -1,0 +1,139 @@
+---
+/*
+  Header.astro — Site navigation.
+
+  LEARNING NOTES:
+  ─────────────────────────────────────────────────────────────
+  1. Astro.url gives you the current page URL at build time.
+     We use it to highlight the active navigation link.
+
+  2. No JavaScript is needed for this component — it's pure
+     HTML + CSS rendered at build time.
+  ─────────────────────────────────────────────────────────────
+*/
+
+// Get current path to highlight active nav link
+const currentPath = Astro.url.pathname;
+
+// Define navigation links in a data structure.
+// This makes it easy to add/remove links later.
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/resume/", label: "Resume" },
+  { href: "/misc/", label: "Misc" },
+];
+---
+
+<header>
+  <nav>
+    <a href="/" class="site-title">Gianluigi Dal Toso</a>
+
+    <ul>
+      {
+        /*
+          LEARNING NOTE — Rendering lists:
+          Use .map() to iterate over arrays, just like in JSX.
+          Astro uses the same {expression} syntax.
+        */
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "nav-link",
+                /*
+                  class:list is an Astro utility that conditionally
+                  applies CSS classes. Here, we add "active" when
+                  the current path matches the link's href.
+                */
+                {
+                  active:
+                    currentPath === link.href ||
+                    (link.href !== "/" &&
+                      currentPath.startsWith(link.href)),
+                },
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  /*
+    LEARNING NOTE — Scoped CSS:
+    These styles ONLY apply to the HTML inside this component.
+    Astro adds a unique attribute (like data-astro-cid-xxxx) to
+    scope them. You can write simple class names without worrying
+    about collisions with other components.
+  */
+  header {
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+  }
+
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .site-title:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--space-xs) 0;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-accent);
+  }
+
+  /* Responsive: stack nav on very small screens */
+  @media (max-width: 480px) {
+    nav {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+</style>

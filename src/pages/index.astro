@@ -1,0 +1,106 @@
+---
+/*
+  src/pages/index.astro — The homepage (renders at /)
+
+  LEARNING NOTES:
+  ─────────────────────────────────────────────────────────────
+  1. FILE-BASED ROUTING: Any .astro file inside src/pages/
+     becomes a route. index.astro → /, blog.astro → /blog,
+     blog/[slug].astro → /blog/:slug (dynamic route).
+
+  2. LAYOUTS: We wrap page content in a layout component.
+     The layout provides the <html>, <head>, navigation, etc.
+     The page content goes into the layout's <slot />.
+
+  3. This page has no JavaScript — it's pure static HTML.
+  ─────────────────────────────────────────────────────────────
+*/
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+---
+
+<BaseLayout title="Gianluigi Dal Toso">
+  <section class="hero">
+    <h1>Hey, I'm Gianluigi<span class="wave">👋</span></h1>
+    <p class="headline">Security Engineer & Software Developer</p>
+
+    <div class="bio">
+      <p>
+        Brazilian computer engineer and <a
+          href="https://en.wikipedia.org/wiki/Instituto_Tecnol%C3%B3gico_de_Aeron%C3%A1utica"
+          target="_blank"
+          rel="noopener noreferrer">ITA</a
+        > graduate. I currently work as a Security Engineer at <a
+          href="https://www.praetorian.com/"
+          target="_blank"
+          rel="noopener noreferrer">Praetorian</a
+        >, where I conduct offensive security assessments across web, mobile,
+        desktop applications, and LLMs. I also build internal tooling in Go and Java.
+      </p>
+      <p>
+        Before Praetorian, I served as a cyber defense officer in the Brazilian
+        Air Force (FAB), performing red team assessments and vulnerability research.
+      </p>
+      <p>
+        Building things with Go. Breaking things for a living.
+      </p>
+    </div>
+
+    <SocialLinks />
+  </section>
+</BaseLayout>
+
+<style>
+  /*
+    LEARNING NOTE:
+    These styles are SCOPED to this page only.
+    They won't leak to /blog, /resume, etc.
+  */
+  .hero {
+    padding: var(--space-xl) 0;
+  }
+
+  h1 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .wave {
+    display: inline-block;
+    margin-left: var(--space-xs);
+    animation: wave 2s ease-in-out infinite;
+    transform-origin: 70% 70%;
+  }
+
+  @keyframes wave {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    10%,
+    30% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50%,
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .headline {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+    font-weight: 500;
+  }
+
+  .bio p {
+    color: var(--color-text-secondary);
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+/*
+  BaseLayout.astro — The root layout for every page.
+
+  LEARNING NOTES:
+  ─────────────────────────────────────────────────────────────
+  1. The code between the --- fences is the "frontmatter".
+     It runs at BUILD TIME on the server, never in the browser.
+     You can import components, fetch data, define variables, etc.
+
+  2. Astro components are like HTML templates with superpowers.
+     They output zero JavaScript by default.
+
+  3. Props are how parent pages pass data into layouts.
+     We use TypeScript to define the shape of those props.
+
+  4. <slot /> is where child content gets injected —
+     similar to {children} in React or <ng-content> in Angular.
+  ─────────────────────────────────────────────────────────────
+*/
+
+// Import the global stylesheet — Astro bundles & optimizes it automatically
+import "../styles/global.css";
+
+// Import reusable components
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+// Define the props this layout accepts
+interface Props {
+  title: string;
+  description?: string;
+}
+
+// Destructure props with defaults
+const {
+  title,
+  description = "Personal website of Gianluigi Dal Toso — Security Engineer & Software Developer",
+} = Astro.props;
+---
+
+<!--
+  Everything below is the HTML template.
+  You can use {expressions} to embed variables from the frontmatter.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Preload the Inter font from Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <!--
+        <slot /> renders whatever the parent page puts inside this layout.
+        For example, in index.astro:
+          <BaseLayout title="Home">
+            <h1>Hello!</h1>    ← this goes into the <slot />
+          </BaseLayout>
+      -->
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<!--
+  LEARNING NOTE — Scoped styles:
+  ─────────────────────────────────────────────────────────────
+  Styles in an Astro component are SCOPED by default — they
+  only apply to the HTML in this file. To make styles global
+  (affect child components too), use <style is:global>.
+
+  Here we use is:global for <main> because the content inside
+  the <slot /> comes from other pages/components.
+  ─────────────────────────────────────────────────────────────
+-->
+<style is:global>
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-lg);
+    flex: 1;
+  }
+</style>

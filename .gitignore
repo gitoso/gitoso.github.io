@@ -1,0 +1,23 @@
+# Astro build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Astro generated types
+.astro/
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Devcontainer
+.devcontainer/

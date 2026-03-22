@@ -1,0 +1,53 @@
+---
+/*
+  Footer.astro — Simple site footer.
+
+  LEARNING NOTE:
+  ─────────────────────────────────────────────────────────────
+  Even the simplest component benefits from being extracted.
+  If you ever want to add links, a copyright year, or social
+  icons, you change it in one place and it updates everywhere.
+  ─────────────────────────────────────────────────────────────
+*/
+
+// Build-time expression: get the current year automatically
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <p>
+    &copy; {currentYear} Gianluigi Dal Toso
+    <span class="separator">&middot;</span>
+    <a href="https://github.com/gitoso" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <span class="separator">&middot;</span>
+    <a href="https://www.linkedin.com/in/gianluigi-toso/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </p>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .separator {
+    margin: 0 var(--space-xs);
+  }
+
+  footer a {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  footer a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+</style>
